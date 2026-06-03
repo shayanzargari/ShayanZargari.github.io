@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Shayan Zargari, Wireless Systems Engineer &amp; PhD</title>
+<meta name="description" content="Shayan Zargari is a wireless systems engineer at Huawei and holds a PhD in electrical engineering. Wi-Fi sensing, mmWave radar, signal processing, optimization, and AI/ML for wireless systems." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=IBM+Plex+Serif:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#070b0c;
+    --bg-2:#0a1011;
+    --panel:#0d1517;
+    --panel-2:#10191b;
+    --ink:#edf2f0;
+    --soft:#9aa8a3;
+    --faint:#5a6964;
+    --line:rgba(255,255,255,.07);
+    --line-2:rgba(255,255,255,.04);
+    --line-acc:rgba(120,225,202,.2);
+    --acc:#78e1ca;
+    --acc-deep:#2c9883;
+    --acc-soft:rgba(120,225,202,.08);
+    --display:'IBM Plex Serif', Georgia, serif;
+    --body:'IBM Plex Sans', system-ui, sans-serif;
+    --mono:'IBM Plex Mono', monospace;
+    --maxw:1200px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:var(--body);font-weight:300;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden;position:relative}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--acc);color:#04231f}
+  ::-webkit-scrollbar{width:10px}
+  ::-webkit-scrollbar-track{background:var(--bg)}
+  ::-webkit-scrollbar-thumb{background:#1a2628;border-radius:6px;border:2px solid var(--bg)}
+  ::-webkit-scrollbar-thumb:hover{background:var(--acc-deep)}
+
+  /* soft film grain */
+  body::after{
+    content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    mix-blend-mode:overlay;
+  }
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px;position:relative;z-index:2}
+  .hl{color:var(--acc);font-weight:400}
+  .em{color:var(--ink);font-weight:400}
+
+  /* ---------- NAV ---------- */
+  nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(16px);background:rgba(7,11,12,.6);border-bottom:1px solid var(--line-2)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:74px}
+  .brand{font-family:var(--mono);font-weight:500;font-size:.92rem;letter-spacing:.18em;display:flex;align-items:center;gap:12px;text-transform:uppercase}
+  .brand .dot{width:7px;height:7px;border-radius:50%;background:var(--acc);box-shadow:0 0 14px var(--acc);animation:pulse 2.6s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:.55;box-shadow:0 0 8px var(--acc)}50%{opacity:1;box-shadow:0 0 20px var(--acc)}}
+  .navlinks{display:flex;gap:26px;font-size:.72rem;font-family:var(--mono);text-transform:uppercase;letter-spacing:.14em}
+  .navlinks a{color:var(--soft);transition:color .25s;position:relative}
+  .navlinks a::after{content:"";position:absolute;left:0;bottom:-7px;width:0;height:1px;background:var(--acc);transition:width .3s}
+  .navlinks a:hover{color:var(--acc)}
+  .navlinks a:hover::after{width:100%}
+  .navtoggle{display:none;font-size:1.4rem;background:none;border:none;cursor:pointer;color:var(--acc)}
+
+  /* ---------- HERO ---------- */
+  header{position:relative;padding:120px 0 70px;overflow:hidden}
+  .field{position:absolute;inset:0;z-index:1;width:100%;height:100%;pointer-events:none;-webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.18) 30%,#000 62%);mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.18) 30%,#000 62%)}
+  .hero-inner{position:relative;z-index:3;max-width:780px}
+  h1{font-family:var(--display);font-weight:400;font-size:clamp(3rem,8vw,6rem);line-height:1.0;letter-spacing:-.02em;margin-bottom:32px;color:#f4f9f7}
+  h1 em{font-style:italic;font-weight:500;color:var(--acc)}
+  .role{font-size:1.16rem;color:var(--soft);max-width:42ch;margin-bottom:8px;font-weight:300}
+  .role .hl{color:var(--ink);font-weight:400}
+  .loc{font-family:var(--mono);font-size:.8rem;color:var(--faint);margin:22px 0 36px;display:flex;align-items:center;gap:10px;letter-spacing:.04em}
+  .loc::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--acc);box-shadow:0 0 10px var(--acc)}
+
+  .cta{display:flex;flex-wrap:wrap;gap:14px}
+  .btn{font-family:var(--mono);font-size:.76rem;letter-spacing:.08em;padding:14px 24px;border:1px solid var(--line);border-radius:2px;display:inline-flex;align-items:center;gap:9px;transition:all .3s;background:transparent;cursor:pointer;color:var(--ink);text-transform:uppercase}
+  .btn:hover{border-color:var(--acc);color:var(--acc);transform:translateY(-2px)}
+  .btn.primary{background:var(--acc);border-color:var(--acc);color:#04231f;font-weight:500}
+  .btn.primary:hover{background:#92ecd8;color:#04231f;box-shadow:0 0 30px rgba(120,225,202,.35)}
+
+
+  /* ---------- METRICS ---------- */
+  .metrics{border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2);background:var(--bg-2);position:relative;z-index:2}
+  .metrics .wrap{display:grid;grid-template-columns:repeat(6,1fr);gap:0}
+  .metric{padding:40px 16px;text-align:center;border-right:1px solid var(--line-2);position:relative}
+  .metric:last-child{border-right:none}
+  .metric .num{font-family:var(--display);font-size:2.7rem;font-weight:400;color:var(--ink);line-height:1;letter-spacing:-.01em}
+  .metric .num .suf{font-size:1.3rem;vertical-align:super;color:var(--acc)}
+  .metric .lab{font-family:var(--mono);font-size:.64rem;text-transform:uppercase;letter-spacing:.14em;color:var(--faint);margin-top:13px;line-height:1.5}
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:130px 0;position:relative;z-index:2}
+  .sec-head{position:relative;margin-bottom:64px}
+  .sec-head h2{font-family:var(--display);font-weight:400;font-size:clamp(2.2rem,5vw,3.6rem);letter-spacing:-.02em;color:#f2f7f5}
+  .rule{height:1px;background:linear-gradient(90deg,var(--line),transparent);margin-top:28px}
+
+  .about-grid{display:grid;grid-template-columns:1.35fr .85fr;gap:64px}
+  .about p{font-size:1.08rem;color:var(--soft);margin-bottom:22px;font-weight:300;text-align:justify;hyphens:auto}
+  .about p:first-child{font-size:1.35rem;color:var(--ink);line-height:1.55;font-weight:400;font-family:var(--display)}
+  .aside{border-left:1px solid var(--line);padding:4px 0 4px 28px;font-family:var(--mono);font-size:.82rem;height:fit-content}
+  .aside .row{padding:16px 0;border-bottom:1px solid var(--line-2);display:flex;justify-content:space-between;gap:16px}
+  .aside .row:last-child{border-bottom:none}
+  .aside .row span:first-child{color:var(--faint);text-transform:uppercase;letter-spacing:.07em;font-size:.66rem}
+  .aside .row span:last-child{text-align:right;color:var(--acc)}
+
+  /* ---------- CARDS ---------- */
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .card{background:linear-gradient(160deg,var(--panel-2),var(--panel));border:1px solid var(--line-2);border-radius:4px;padding:38px 32px;transition:border-color .35s,transform .35s;position:relative;overflow:hidden}
+  .card::before{content:"";position:absolute;left:0;top:0;height:2px;width:0;background:var(--acc);transition:width .4s}
+  .card:hover{border-color:var(--line-acc);transform:translateY(-4px)}
+  .card:hover::before{width:100%}
+  .card .ic{font-family:var(--display);color:var(--acc);font-size:2rem;font-weight:400;line-height:1;letter-spacing:0;margin-bottom:16px;opacity:.85}
+  .card h3{font-family:var(--display);font-size:1.3rem;font-weight:400;margin-bottom:12px;color:#eef5f3}
+  .card p{font-size:.93rem;color:var(--soft);font-weight:300}
+
+  /* ---------- TIMELINE ---------- */
+  .timeline{position:relative;padding-left:38px}
+  .timeline::before{content:"";position:absolute;left:6px;top:8px;bottom:8px;width:1px;background:linear-gradient(var(--acc-deep),transparent)}
+  .tl-item{position:relative;padding-bottom:52px}
+  .tl-item:last-child{padding-bottom:0}
+  .tl-item::before{content:"";position:absolute;left:-37px;top:7px;width:9px;height:9px;border-radius:50%;background:var(--bg);border:1px solid var(--acc)}
+  .tl-item.current::before{background:var(--acc);box-shadow:0 0 14px var(--acc);animation:pulse 2.6s ease-in-out infinite}
+  .tl-when{font-family:var(--mono);font-size:.72rem;color:var(--acc);letter-spacing:.06em}
+  .tl-role{font-family:var(--display);font-size:1.5rem;font-weight:400;margin:6px 0 3px;color:#eef5f3}
+  .tl-org{color:var(--soft);font-weight:400;font-size:.98rem;margin-bottom:11px}
+  .tl-org .place{color:var(--faint);font-weight:300}
+  .tl-desc{color:var(--soft);font-size:.96rem;max-width:68ch;font-weight:300;text-align:justify;hyphens:auto}
+  .tl-list{list-style:none;margin:14px 0 0;padding:0;max-width:68ch}
+  .tl-list li{position:relative;padding-left:20px;margin-bottom:9px;color:var(--soft);font-size:.93rem;font-weight:300;line-height:1.6}
+  .tl-list li:last-child{margin-bottom:0}
+  .tl-list li::before{content:"";position:absolute;left:0;top:.66em;width:8px;height:1px;background:var(--acc)}
+
+  /* ---------- PUBLICATIONS ---------- */
+  .pubfilter{display:flex;gap:11px;margin-bottom:34px;flex-wrap:wrap}
+  .pubfilter button{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;padding:10px 18px;border:1px solid var(--line);background:transparent;border-radius:2px;cursor:pointer;color:var(--soft);transition:all .25s}
+  .pubfilter button.active,.pubfilter button:hover{background:var(--acc);color:#04231f;border-color:var(--acc);font-weight:500}
+  .pub{display:grid;grid-template-columns:58px 1fr;gap:24px;padding:24px 14px;border-bottom:1px solid var(--line-2);transition:background .25s,padding-left .25s;border-left:1px solid transparent}
+  .pub:hover{background:var(--acc-soft);padding-left:22px;border-left-color:var(--acc)}
+  .pub .yr{font-family:var(--display);font-size:1.5rem;font-weight:400;color:var(--faint)}
+  .pub:hover .yr{color:var(--acc)}
+  .pub .meta{font-size:.98rem}
+  .pub .ttl{font-weight:400;color:var(--ink);line-height:1.5}
+  .pub .auth{font-size:.85rem;color:var(--faint);margin:7px 0;font-family:var(--mono)}
+  .pub .auth .me{color:var(--acc);font-weight:400}
+  .pub .ven{font-family:var(--mono);font-size:.73rem;color:var(--soft)}
+  .badge{display:inline-block;font-family:var(--mono);font-size:.58rem;text-transform:uppercase;letter-spacing:.1em;padding:2px 8px;border:1px solid var(--line);border-radius:2px;margin-left:9px;color:var(--faint);vertical-align:middle}
+  .badge.j{color:var(--acc);border-color:var(--line-acc)}
+  .pubmore{margin-top:36px;display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+  #publist{position:relative}
+  #publist.collapsed::after{content:"";position:absolute;left:0;right:0;bottom:0;height:96px;background:linear-gradient(rgba(7,11,12,0),var(--bg));pointer-events:none}
+
+  .twocol{display:grid;grid-template-columns:1fr 1fr;gap:64px}
+  .grouphead{font-family:var(--mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.16em;color:var(--acc);margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+  .list-clean li{list-style:none;padding:15px 0;border-bottom:1px solid var(--line-2);display:flex;gap:16px;align-items:flex-start}
+  .list-clean li:last-child{border-bottom:none}
+  .list-clean .yr{font-family:var(--mono);font-size:.74rem;color:var(--acc);min-width:76px;padding-top:3px}
+  .list-clean .txt{font-size:.95rem;color:var(--soft);font-weight:300}
+
+  /* ---------- SKILLS ---------- */
+  .skillgroups{display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
+  .skillgroup h4{font-family:var(--mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.16em;color:var(--acc);margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+  .tags{display:flex;flex-wrap:wrap;gap:10px}
+  .tag{font-size:.74rem;padding:8px 14px;background:transparent;border:1px solid var(--line);border-radius:2px;color:var(--soft);transition:all .25s;font-family:var(--mono)}
+  .tag:hover{border-color:var(--acc);color:var(--acc);transform:translateY(-2px)}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--bg-2);color:var(--ink);padding:120px 0 46px;position:relative;z-index:2;overflow:hidden;border-top:1px solid var(--line-2)}
+  footer::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 78% 8%,rgba(120,225,202,.1),transparent 50%);pointer-events:none}
+  footer h2{font-family:var(--display);font-size:clamp(2.6rem,7vw,4.6rem);font-weight:400;margin-bottom:20px;position:relative;color:#f4f9f7;line-height:1}
+  footer h2 em{font-style:italic;font-weight:500;color:var(--acc)}
+  footer .lead{color:var(--soft);max-width:52ch;margin-bottom:42px;position:relative;font-size:1.06rem;font-weight:300}
+  .flinks{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:64px;position:relative}
+  .flink{font-family:var(--mono);font-size:.76rem;padding:14px 22px;border:1px solid var(--line);border-radius:2px;transition:all .3s;text-transform:uppercase;letter-spacing:.06em}
+  .flink:hover{border-color:var(--acc);color:var(--acc);transform:translateY(-2px)}
+  .fbar{border-top:1px solid var(--line-2);padding-top:30px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-family:var(--mono);font-size:.7rem;color:var(--faint);position:relative;letter-spacing:.04em}
+
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity .85s cubic-bezier(.2,.7,.2,1),transform .85s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  @media(max-width:900px){
+    .field{opacity:.55}
+
+    .about-grid,.twocol{grid-template-columns:1fr;gap:42px}
+    .aside{border-left:none;border-top:1px solid var(--line);padding:20px 0 0}
+    .cards,.skillgroups{grid-template-columns:1fr 1fr}
+
+    .metrics .wrap{grid-template-columns:repeat(3,1fr)}
+    .metric:nth-child(3){border-right:none}
+    .metric:nth-child(-n+3){border-bottom:1px solid var(--line-2)}
+    .navlinks{display:none;position:absolute;top:74px;left:0;right:0;flex-direction:column;background:var(--bg-2);padding:24px 40px;gap:22px;border-bottom:1px solid var(--line)}
+    .navlinks.open{display:flex}
+    .navtoggle{display:block}
+  }
+  @media(max-width:560px){
+    .wrap{padding:0 24px}
+    .cards,.skillgroups{grid-template-columns:1fr}
+    .metrics .wrap{grid-template-columns:1fr 1fr}
+    .metric{border-right:none;border-bottom:1px solid var(--line-2)}
+    .metric:nth-child(odd){border-right:1px solid var(--line-2)}
+  }
+  @media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand"><span class="dot"></span>S&middot;Zargari</div>
+    <button class="navtoggle" aria-label="menu" onclick="document.getElementById('nv').classList.toggle('open')">☰</button>
+    <div class="navlinks" id="nv">
+      <a href="#about">About</a>
+      <a href="#research">Research</a>
+      <a href="#experience">Experience</a>
+      <a href="#publications">Publications</a>
+      <a href="#awards">Awards</a>
+      <a href="#teaching">Teaching</a>
+      <a href="#service">Service</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <!-- animated signal field -->
+  <canvas class="field" id="field" aria-hidden="true"></canvas>
+
+  <div class="wrap">
+    <div class="hero-inner">
+      <h1 class="reveal">Shayan <em>Zargari</em></h1>
+      <p class="role reveal">I'm a wireless engineer at Huawei in Ottawa, and I hold a PhD in electrical engineering. Most of my work is in Wi-Fi sensing and mmWave radar, plus the signal processing and machine learning that make them work.</p>
+    </div>
+  </div>
+</header>
+
+<!-- METRICS -->
+<div class="metrics">
+  <div class="wrap" id="metricstrip">
+    <div class="metric"><div class="num"><span data-count="1037">0</span><span class="suf">+</span></div><div class="lab">Citations</div></div>
+    <div class="metric"><div class="num"><span data-count="17">0</span></div><div class="lab">h-index</div></div>
+    <div class="metric"><div class="num"><span data-count="30">0</span><span class="suf">+</span></div><div class="lab">Publications</div></div>
+    <div class="metric"><div class="num"><span data-count="3">0</span></div><div class="lab">Degrees, 4/4 GPA</div></div>
+    <div class="metric"><div class="num"><span data-count="10">0</span><span class="suf">+</span></div><div class="lab">IEEE Reviewer Venues</div></div>
+    <div class="metric"><div class="num" style="font-size:2rem">1<span style="font-size:1.05rem;color:var(--soft)"> yr</span> 5<span style="font-size:1.05rem;color:var(--soft)"> mo</span></div><div class="lab">@ Huawei R&amp;D</div></div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head reveal"><h2>About</h2><div class="rule"></div></div>
+    <div class="about-grid">
+      <div class="about reveal">
+        <p>I'm a wireless engineer at Huawei in Ottawa, where I work on Wi-Fi sensing: using the signals that wireless systems already exchange to sense what is happening in the space around them.</p>
+        <p>Most of my time goes into the signal processing and machine-learning models that turn raw wireless measurements into reliable information, and into making sure those algorithms hold up as part of a real system rather than only in simulation.</p>
+        <p>I did my PhD in electrical engineering at the University of Alberta, finishing with a 4/4 GPA. My research focused on the physical layer of wireless communication, including 6G systems, reconfigurable intelligent surfaces, integrated sensing and communication, ambient backscatter, and deep learning for channel estimation and signal detection. What I enjoy most is taking an idea that starts as math and getting it to work reliably on real hardware.</p>
+
+      </div>
+      <div class="aside reveal">
+        <div class="row"><span>Role</span><span>Engineer, Huawei Canada</span></div>
+        <div class="row"><span>Based in</span><span>Ottawa, Canada</span></div>
+        <div class="row"><span>PhD</span><span>Electrical Eng., U. Alberta</span></div>
+        <div class="row"><span>Focus</span><span>Wi-Fi &amp; radar sensing</span></div>
+        <div class="row"><span>Methods</span><span>Signal processing, ML</span></div>
+        <div class="row"><span>Service</span><span>IEEE reviewer</span></div>
+        <div class="row"><span>Citations</span><span>1,000+ on Scholar</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section id="research" style="background:var(--bg-2)">
+  <div class="wrap">
+    <div class="sec-head reveal"><h2>Research interests</h2><div class="rule"></div></div>
+    <div class="cards">
+      <div class="card reveal"><div class="ic">01</div><h3>Wi-Fi Sensing</h3><p>CSI processing for activity recognition, presence detection, and through-the-air perception in IEEE 802.11 systems.</p></div>
+      <div class="card reveal"><div class="ic">02</div><h3>mmWave Radar</h3><p>Radar-based perception and gesture recognition, with feature extraction tuned for low false-alarm sensing.</p></div>
+      <div class="card reveal"><div class="ic">03</div><h3>Integrated Sensing &amp; Comm.</h3><p>ISAC beamforming, multi-target detection, and CRB minimization for joint sensing and communication.</p></div>
+      <div class="card reveal"><div class="ic">04</div><h3>AI / ML for Wireless</h3><p>A broad range of machine-learning and deep-learning methods applied to wireless problems, from channel estimation and signal detection to reliable classification under real-world conditions.</p></div>
+      <div class="card reveal"><div class="ic">05</div><h3>Optimization &amp; Beamforming</h3><p>Convex optimization, SDR, manifold methods, and alternating optimization for resource allocation.</p></div>
+      <div class="card reveal"><div class="ic">06</div><h3>PHY / MAC Layer Design</h3><p>Physical- and MAC-layer algorithm and protocol design for 5G, 6G, and Wi-Fi systems.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head reveal"><h2>Experience</h2><div class="rule"></div></div>
+    <div class="timeline">
+      <div class="tl-item current reveal">
+        <div class="tl-when">Feb 2025 to Present</div>
+        <div class="tl-role">Engineer</div>
+        <div class="tl-org">Huawei Technologies Canada, <span class="place">Ottawa, Canada</span></div>
+        <div class="tl-desc">My work here spans Wi-Fi sensing and mmWave radar, taking algorithms from a first version through to something that performs reliably as part of a real system. In practice that includes:</div>
+        <ul class="tl-list">
+          <li>Building and validating Wi-Fi sensing and communication algorithms with an eye on reliability and system-level behavior, not just performance in a clean simulation.</li>
+          <li>Developing resource-allocation algorithms for several coordinated access points in Wi-Fi networks, then measuring how they actually perform across the whole system.</li>
+          <li>Working on mmWave radar and wireless-sensing algorithms for joint communication-and-sensing prototypes, including tracking, gesture recognition, respiration monitoring, and heart-rate detection.</li>
+          <li>Designing and training the machine-learning models behind these prototypes, for both Wi-Fi sensing and mmWave radar signal processing.</li>
+          <li>Validating the work through simulation, prototype testing, and experiments on real measurement data, testbeds, and controlled scenarios.</li>
+          <li>Writing the software tools and automation that keep data processing, testing, model evaluation, experiment management, and analysis running smoothly.</li>
+        </ul>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-when">May 2021 to Apr 2025</div>
+        <div class="tl-role">Lead Researcher</div>
+        <div class="tl-org">Wireless Communication Lab, University of Alberta, <span class="place">Edmonton, Canada</span></div>
+        <div class="tl-desc">Led research on 6G communication systems using signal processing and machine learning, including work on intelligent reflecting surfaces, UAV-aided networks, SWIPT, and ambient backscatter communication.</div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-when">May 2021 to Jun 2023</div>
+        <div class="tl-role">Research Collaborator with Huawei</div>
+        <div class="tl-org">University of Alberta, <span class="place">Edmonton, Canada</span></div>
+        <div class="tl-desc">Collaborated with Huawei on 6G research, coordinating with their R&amp;D engineers to align academic objectives with industrial goals and presenting research progress that contributed to new wireless technologies.</div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-when">Aug 2020 to Aug 2021</div>
+        <div class="tl-role">Visiting Researcher</div>
+        <div class="tl-org">Wireless Communication Lab, Tarbiat Modares University, <span class="place">Tehran, Iran</span></div>
+        <div class="tl-desc">Optimized resource allocation in UAV-aided IRS systems using reinforcement learning, building models that predict and improve network performance as conditions change.</div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-when">Aug 2019 to Aug 2020</div>
+        <div class="tl-role">Research Assistant</div>
+        <div class="tl-org">Optical Wireless Networks Lab, Iran University of Science and Technology, <span class="place">Tehran, Iran</span></div>
+        <div class="tl-desc">Developed resource-allocation strategies for visible light communication (VLC) networks, optimizing data rates for high-speed, reliable links.</div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-when">Aug 2019 to Mar 2020</div>
+        <div class="tl-role">Visiting Researcher</div>
+        <div class="tl-org">Wireless Communication Lab, Sharif University of Technology, <span class="place">Tehran, Iran</span></div>
+        <div class="tl-desc">Designed device-to-device (D2D) communication systems using non-orthogonal multiple access (NOMA), reducing interference to improve spectral efficiency.</div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-when">Aug 2018 to Dec 2020</div>
+        <div class="tl-role">Research Assistant</div>
+        <div class="tl-org">Wireless Communication Lab, Iran University of Science and Technology, <span class="place">Tehran, Iran</span></div>
+        <div class="tl-desc">Designed optimization algorithms for resource allocation in 5G/6G systems, focusing on IRS-aided SWIPT to enhance power and data-transfer efficiency.</div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-when">Oct 2015 to Oct 2016</div>
+        <div class="tl-role">R&amp;D Intern</div>
+        <div class="tl-org">Electropeyk, <span class="place">Tehran, Iran</span></div>
+        <div class="tl-desc">Worked with the R&amp;D team on video intercom systems, solving circuit-design problems and improving overall system efficiency.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education" style="background:var(--bg-2)">
+  <div class="wrap">
+    <div class="sec-head reveal"><h2>Education</h2><div class="rule"></div></div>
+    <div class="timeline">
+      <div class="tl-item reveal">
+        <div class="tl-when">May 2021 to Apr 2025, GPA 4 / 4</div>
+        <div class="tl-role">Ph.D., Electrical Engineering</div>
+        <div class="tl-org">University of Alberta, <span class="place">Edmonton, Canada</span></div>
+        <div class="tl-desc">Wireless communication systems, with a focus on 6G, intelligent reflecting surfaces, integrated sensing and communication, and AI-driven channel estimation and signal detection.</div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-when">Aug 2018 to Dec 2020, GPA 4 / 4</div>
+        <div class="tl-role">M.Sc., Electrical Engineering</div>
+        <div class="tl-org">Iran University of Science and Technology, <span class="place">Tehran, Iran</span></div>
+        <div class="tl-desc">Wireless Communication Systems. Ranked first among 39 M.Sc. students; placed in the top 5% of the national entrance exam among 10,555 candidates.</div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-when">Aug 2014 to Aug 2018, GPA 4 / 4</div>
+        <div class="tl-role">B.Sc., Electrical Engineering (Electronics)</div>
+        <div class="tl-org">Islamic Azad University, South Tehran Branch, <span class="place">Tehran, Iran</span></div>
+        <div class="tl-desc">Foundations in electronics, circuits, and signal processing.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section id="publications">
+  <div class="wrap">
+    <div class="sec-head reveal"><h2>Publications</h2><div class="rule"></div></div>
+    <div class="pubfilter reveal">
+      <button class="active" data-f="all">All</button>
+      <button data-f="2025">2025</button>
+      <button data-f="2024">2024</button>
+      <button data-f="2023">2023</button>
+      <button data-f="2022">2022</button>
+      <button data-f="2021">2021</button>
+    </div>
+    <div id="publist">
+      <div class="pub reveal" data-yr="2025"><div class="yr">'25</div><div class="meta"><div class="ttl">Downlink beamforming for cell-free ISAC: A fast complex oblique manifold approach<span class="badge j">Journal</span></div><div class="auth"><span class="me">S. Zargari</span>, D. Galappaththige, C. Tellambura, G. Y. Li</div><div class="ven">IEEE Trans. Wireless Commun., 2025</div></div></div>
+      <div class="pub reveal" data-yr="2025"><div class="yr">'25</div><div class="meta"><div class="ttl">Low-complexity CRB minimization for ISAC with a generalized target response matrix<span class="badge j">Journal</span></div><div class="auth"><span class="me">S. Zargari</span>, D. Galappaththige, C. Tellambura</div><div class="ven">IEEE Wireless Commun. Lett., 2025</div></div></div>
+      <div class="pub reveal" data-yr="2025"><div class="yr">'25</div><div class="meta"><div class="ttl">Optimization of rate-splitting multiple access with integrated sensing and backscatter communication<span class="badge j">Journal</span></div><div class="auth">D. Galappaththige, <span class="me">S. Zargari</span>, C. Tellambura, G. Y. Li</div><div class="ven">IEEE Trans. Veh. Technol., vol. 74, 2025</div></div></div>
+      <div class="pub reveal" data-yr="2025"><div class="yr">'25</div><div class="meta"><div class="ttl">Low-complexity multi-target detection in ELAA ISAC<span class="badge j">Journal</span></div><div class="auth">D. Galappaththige, <span class="me">S. Zargari</span>, C. Tellambura, G. Y. Li</div><div class="ven">IEEE Commun. Lett., 2025</div></div></div>
+      <div class="pub reveal" data-yr="2025"><div class="yr">'25</div><div class="meta"><div class="ttl">Dual function of sensing and backscatter communication in cellular networks<span class="badge j">Journal</span></div><div class="auth">D. Galappaththige, <span class="me">S. Zargari</span>, C. Tellambura</div><div class="ven">IEEE Internet Things J., vol. 8, 2025</div></div></div>
+      <div class="pub reveal" data-yr="2024"><div class="yr">'24</div><div class="meta"><div class="ttl">A Riemannian manifold approach to constrained resource allocation in ISAC<span class="badge j">Journal</span></div><div class="auth"><span class="me">S. Zargari</span>, D. Galappaththige, C. Tellambura, H. Vincent Poor</div><div class="ven">IEEE Trans. Commun., 2024</div></div></div>
+      <div class="pub reveal" data-yr="2024"><div class="yr">'24</div><div class="meta"><div class="ttl">Transmit power-efficient beamforming design for integrated sensing and backscatter communication<span class="badge j">Journal</span></div><div class="auth"><span class="me">S. Zargari</span>, D. Galappaththige, C. Tellambura</div><div class="ven">IEEE Open J. Commun. Soc., 2024</div></div></div>
+      <div class="pub reveal" data-yr="2024"><div class="yr">'24</div><div class="meta"><div class="ttl">Near-field ISAC: Beamforming for multi-target detection<span class="badge j">Journal</span></div><div class="auth">D. Galappaththige, <span class="me">S. Zargari</span>, C. Tellambura, G. Y. Li</div><div class="ven">IEEE Wireless Commun. Lett., 2024</div></div></div>
+      <div class="pub reveal" data-yr="2024"><div class="yr">'24</div><div class="meta"><div class="ttl">Deep conditional generative adversarial networks for efficient channel estimation in AmBC systems<span class="badge j">Journal</span></div><div class="auth"><span class="me">S. Zargari</span>, C. Tellambura, A. Maaref, G. Y. Li</div><div class="ven">IEEE Trans. Mach. Learn. Commun. Netw., 2024</div></div></div>
+      <div class="pub reveal" data-yr="2024"><div class="yr">'24</div><div class="meta"><div class="ttl">Integrated communication and sensing with symbiotic radio and RIS-assisted backscatter<span class="badge j">Journal</span></div><div class="auth">A. Hakimi, <span class="me">S. Zargari</span>, C. Tellambura</div><div class="ven">IEEE Wireless Commun. Lett., 2024</div></div></div>
+      <div class="pub reveal" data-yr="2024"><div class="yr">'24</div><div class="meta"><div class="ttl">Using machine learning to predict item difficulty and response time in medical tests<span class="badge">Conf.</span></div><div class="auth">M. Yousefpoori-Naeim, <span class="me">S. Zargari</span>, Z. Hatami</div><div class="ven">Proc. 19th Workshop on Innovative Use of NLP for Building Educational Apps (BEA), 2024</div></div></div>
+      <div class="pub reveal" data-yr="2023"><div class="yr">'23</div><div class="meta"><div class="ttl">Energy-efficient hybrid offloading for backscatter-assisted wirelessly powered MEC with RIS<span class="badge j">Journal</span></div><div class="auth"><span class="me">S. Zargari</span>, C. Tellambura, S. Herath</div><div class="ven">IEEE Trans. Mob. Comput., vol. 22(9), 2023</div></div></div>
+      <div class="pub reveal" data-yr="2023"><div class="yr">'23</div><div class="meta"><div class="ttl">Enhancing AmBC systems with deep learning for joint channel estimation and signal detection<span class="badge j">Journal</span></div><div class="auth"><span class="me">S. Zargari</span>, A. Hakimi, C. Tellambura, A. Maaref</div><div class="ven">IEEE Trans. Commun., 2023</div></div></div>
+      <div class="pub reveal" data-yr="2023"><div class="yr">'23</div><div class="meta"><div class="ttl">Signal detection in ambient backscatter systems: Fundamentals, methods, and trends<span class="badge j">Journal</span></div><div class="auth"><span class="me">S. Zargari</span>, A. Hakimi, F. Rezaei, C. Tellambura, A. Maaref</div><div class="ven">IEEE Access, vol. 11, 2023</div></div></div>
+      <div class="pub reveal" data-yr="2023"><div class="yr">'23</div><div class="meta"><div class="ttl">Improved signal detection for ambient backscatter communications<span class="badge j">Journal</span></div><div class="auth"><span class="me">S. Zargari</span>, C. Tellambura, A. Maaref</div><div class="ven">IEEE Trans. Veh. Technol., 2023</div></div></div>
+      <div class="pub reveal" data-yr="2023"><div class="yr">'23</div><div class="meta"><div class="ttl">User scheduling and trajectory optimization for energy-efficient IRS-UAV networks with SWIPT<span class="badge j">Journal</span></div><div class="auth"><span class="me">S. Zargari</span>, A. Hakimi, C. Tellambura, S. Herath</div><div class="ven">IEEE Trans. Veh. Technol., vol. 72(2), 2023</div></div></div>
+      <div class="pub reveal" data-yr="2023"><div class="yr">'23</div><div class="meta"><div class="ttl">Sum rate maximization of MIMO monostatic backscatter networks by suppressing residual self-interference<span class="badge j">Journal</span></div><div class="auth">A. Hakimi, <span class="me">S. Zargari</span>, C. Tellambura, S. Herath</div><div class="ven">IEEE Trans. Commun., vol. 71(1), 2023</div></div></div>
+      <div class="pub reveal" data-yr="2022"><div class="yr">'22</div><div class="meta"><div class="ttl">Multiuser MISO PS-SWIPT systems: Active or passive RIS?<span class="badge j">Journal</span></div><div class="auth"><span class="me">S. Zargari</span>, A. Hakimi, C. Tellambura, S. Herath</div><div class="ven">IEEE Commun. Lett., vol. 11(9), 2022</div></div></div>
+      <div class="pub reveal" data-yr="2022"><div class="yr">'22</div><div class="meta"><div class="ttl">IRS-enabled backscattering in a downlink non-orthogonal multiple access system<span class="badge j">Journal</span></div><div class="auth">A. Hakimi, <span class="me">S. Zargari</span>, C. Tellambura, S. Herath</div><div class="ven">IEEE Commun. Lett., vol. 26(12), 2022</div></div></div>
+      <div class="pub reveal" data-yr="2022"><div class="yr">'22</div><div class="meta"><div class="ttl">Resource allocation of hybrid VLC/RF systems with light energy harvesting<span class="badge j">Journal</span></div><div class="auth"><span class="me">S. Zargari</span>, M. Kolivand, S. A. Nezamalhosseini, B. Abolhassani, L. R. Chen, M. H. Kahaei</div><div class="ven">IEEE Trans. Green Commun. Netw., vol. 6(1), 2022</div></div></div>
+      <div class="pub reveal" data-yr="2022"><div class="yr">'22</div><div class="meta"><div class="ttl">Resource management for transmit power minimization in UAV-assisted RIS HetNets with dual connectivity<span class="badge j">Journal</span></div><div class="auth">A. Khalili, E. M. Monfared, <span class="me">S. Zargari</span>, M. R. Javan, N. M. Yamchi, E. A. Jorswieck</div><div class="ven">IEEE Trans. Wireless Commun., vol. 21(3), 2022</div></div></div>
+      <div class="pub reveal" data-yr="2022"><div class="yr">'22</div><div class="meta"><div class="ttl">Sum rate maximization of full-duplex MIMO monostatic backscatter networks under residual self-interference<span class="badge">Conf.</span></div><div class="auth">A. Hakimi, <span class="me">S. Zargari</span>, C. Tellambura, S. P. Herath</div><div class="ven">17th Canadian Workshop on Information Theory (CWIT), 2022</div></div></div>
+      <div class="pub reveal" data-yr="2021"><div class="yr">'21</div><div class="meta"><div class="ttl">Energy efficiency maximization via joint active and passive beamforming for multiuser MISO IRS-aided SWIPT<span class="badge j">Journal</span></div><div class="auth"><span class="me">S. Zargari</span>, A. Khalili, R. Zhang</div><div class="ven">IEEE Wireless Commun. Lett., vol. 10(3), 2021</div></div></div>
+      <div class="pub reveal" data-yr="2021"><div class="yr">'21</div><div class="meta"><div class="ttl">Max-min fair energy-efficient beamforming for IRS-aided SWIPT with non-linear energy harvesting<span class="badge j">Journal</span></div><div class="auth"><span class="me">S. Zargari</span>, A. Khalili, Q. Wu, M. R. Mili, D. W. K. Ng</div><div class="ven">IEEE Trans. Veh. Technol., vol. 70(6), 2021</div></div></div>
+      <div class="pub reveal" data-yr="2021"><div class="yr">'21</div><div class="meta"><div class="ttl">Robust active and passive beamformer design for IRS-aided downlink MISO PS-SWIPT<span class="badge j">Journal</span></div><div class="auth"><span class="me">S. Zargari</span>, S. Farahmand, B. Abolhassani, C. Tellambura</div><div class="ven">IEEE Trans. Green Commun. Netw., vol. 5(4), 2021</div></div></div>
+      <div class="pub reveal" data-yr="2021"><div class="yr">'21</div><div class="meta"><div class="ttl">Multi-objective resource allocation for IRS-aided SWIPT<span class="badge j">Journal</span></div><div class="auth">A. Khalili, <span class="me">S. Zargari</span>, Q. Wu, D. W. K. Ng, R. Zhang</div><div class="ven">IEEE Wireless Commun. Lett., vol. 10(6), 2021</div></div></div>
+      <div class="pub reveal" data-yr="2021"><div class="yr">'21</div><div class="meta"><div class="ttl">Joint design of transmit beamforming, IRS platform, and power-splitting SWIPT receivers for downlink MISO<span class="badge j">Journal</span></div><div class="auth"><span class="me">S. Zargari</span>, S. Farahmand, B. Abolhassani</div><div class="ven">Physical Communication, vol. 48, 2021</div></div></div>
+    </div>
+    <div class="pubmore">
+      <button class="btn" id="pubtoggle" type="button">Show all</button>
+      <a class="btn" href="https://scholar.google.com/citations?user=FS1X-SYAAAAJ&hl=en" target="_blank" rel="noopener">View all on Google Scholar</a>
+    </div>
+  </div>
+</section>
+
+<!-- HONORS & AWARDS -->
+<section id="awards" style="background:var(--bg-2)">
+  <div class="wrap">
+    <div class="sec-head reveal"><h2>Honors &amp; awards</h2><div class="rule"></div></div>
+    <ul class="list-clean reveal" style="max-width:820px">
+      <li><span class="yr">2023–25</span><span class="txt">Alberta Innovates Graduate Student Scholarship, University of Alberta</span></li>
+      <li><span class="yr">2024</span><span class="txt">Variperm Mousavi-Daneshmand Engineering Innovation Award, University of Alberta</span></li>
+      <li><span class="yr">2022</span><span class="txt">Alberta Graduate Excellence Scholarship, University of Alberta</span></li>
+      <li><span class="yr">2022</span><span class="txt">Ranked first among 39 M.Sc. students, IUST</span></li>
+      <li><span class="yr">2021</span><span class="txt">Recognized as an exceptional talent for graduate studies</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- TEACHING -->
+<section id="teaching">
+  <div class="wrap">
+    <div class="sec-head reveal"><h2>Teaching</h2><div class="rule"></div></div>
+    <ul class="list-clean reveal" style="max-width:820px">
+      <li><span class="yr">2024</span><span class="txt">Introduction to Communication Systems, University of Alberta (analog and digital communication labs)</span></li>
+      <li><span class="yr">2022</span><span class="txt">Discrete-Time Signals and Systems, University of Alberta (DSP and digital filtering labs)</span></li>
+      <li><span class="yr">2021–23</span><span class="txt">Computer Programming for Engineers, University of Alberta (Python and C++)</span></li>
+      <li><span class="yr">2021–22</span><span class="txt">Analog Electronics, University of Alberta (circuit design and testing labs)</span></li>
+      <li><span class="yr">2019</span><span class="txt">Cellular Wireless Communications, Iran University of Science and Technology (4G/LTE and 5G)</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- PROFESSIONAL SERVICE -->
+<section id="service" style="background:var(--bg-2)">
+  <div class="wrap">
+    <div class="sec-head reveal"><h2>Professional service</h2><div class="rule"></div></div>
+    <p class="reveal" style="color:var(--soft);font-weight:300;max-width:72ch;margin-bottom:40px;text-align:justify;hyphens:auto">I have reviewed for leading IEEE journals and conferences since 2020, evaluating manuscripts across wireless communications, signal processing, and sensing, and serving on the technical program committees of several flagship conferences and workshops.</p>
+    <div class="twocol">
+      <div class="reveal">
+        <h4 class="grouphead">Journal reviewing</h4>
+        <ul class="tl-list" style="margin-top:0">
+          <li>IEEE Transactions on Wireless Communications</li>
+          <li>IEEE Transactions on Communications</li>
+          <li>IEEE Transactions on Vehicular Technology</li>
+          <li>IEEE Transactions on Signal Processing</li>
+          <li>IEEE Journal on Selected Areas in Communications</li>
+          <li>IEEE Internet of Things Journal</li>
+          <li>IEEE Sensors Journal</li>
+          <li>IEEE Communications Letters</li>
+          <li>IEEE Wireless Communications Letters</li>
+          <li>IEEE Access</li>
+          <li>IEEE Vehicular Technology Magazine</li>
+        </ul>
+      </div>
+      <div class="reveal">
+        <h4 class="grouphead">Conferences &amp; workshops</h4>
+        <ul class="list-clean">
+          <li><span class="yr">2025</span><span class="txt">IEEE WCNC, Wireless Communications and Networking Conference</span></li>
+          <li><span class="yr">2024</span><span class="txt">IEEE JSAC, Next-Generation Advanced Transceiver Technologies (special issue)</span></li>
+          <li><span class="yr">2023</span><span class="txt">IEEE GLOBECOM, RIS-Empowered 3CLS for 6G and Beyond Workshop</span></li>
+          <li><span class="yr">2022</span><span class="txt">IEEE/CIC ICCC, Wireless Communications track</span></li>
+          <li><span class="yr">2020–22</span><span class="txt">IEEE GLOBECOM, Wireless Communications and Communication Theory tracks</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head reveal"><h2>Technical skills</h2><div class="rule"></div></div>
+    <div class="skillgroups">
+      <div class="skillgroup reveal">
+        <h4>Programming &amp; Tools</h4>
+        <div class="tags"><span class="tag">Python</span><span class="tag">MATLAB</span><span class="tag">C / C++</span><span class="tag">Bash</span><span class="tag">Git / GitHub</span><span class="tag">Linux</span><span class="tag">CVX</span></div>
+      </div>
+      <div class="skillgroup reveal">
+        <h4>Machine Learning</h4>
+        <div class="tags"><span class="tag">TensorFlow</span><span class="tag">PyTorch</span><span class="tag">Keras</span><span class="tag">Scikit-learn</span><span class="tag">NumPy / SciPy</span><span class="tag">Pandas</span><span class="tag">CNNs</span><span class="tag">LSTMs</span><span class="tag">GANs</span><span class="tag">Autoencoders</span><span class="tag">Transfer Learning</span><span class="tag">OOD Detection</span></div>
+      </div>
+      <div class="skillgroup reveal">
+        <h4>Wireless &amp; Signal Processing</h4>
+        <div class="tags"><span class="tag">Wi-Fi / 802.11</span><span class="tag">mmWave Radar</span><span class="tag">CSI Processing</span><span class="tag">Wi-Fi Sensing</span><span class="tag">LTE</span><span class="tag">5G / 6G</span><span class="tag">PHY / MAC Layer</span><span class="tag">MIMO</span><span class="tag">OFDM</span><span class="tag">Beamforming</span><span class="tag">Channel Estimation</span><span class="tag">Signal Detection</span><span class="tag">Convex Optimization</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT / FOOTER -->
+<footer id="contact">
+  <div class="wrap">
+    <div class="reveal">
+      <h2>Get in <em>touch</em>.</h2>
+      <p class="lead">I'm always happy to talk about wireless communication. Email is the easiest way to reach me.</p>
+    </div>
+    <div class="flinks reveal">
+      <a class="flink" href="mailto:zargari@ualberta.ca">zargari@ualberta.ca</a>
+      <a class="flink" href="https://scholar.google.com/citations?user=FS1X-SYAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>
+      <a class="flink" href="https://www.linkedin.com/in/shayan-zargari-0214b7184/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="flink" href="https://github.com/shayanzargari" target="_blank" rel="noopener">GitHub</a>
+      <a class="flink" href="CV_Zargari.pdf" target="_blank" rel="noopener">CV (PDF)</a>
+    </div>
+    <div class="fbar">
+      <span>© <span id="yr"></span> Shayan Zargari, Ottawa, Canada</span>
+      <span>Built by Shayan Zargari.</span>
+    </div>
+  </div>
+</footer>
+
+<style>@keyframes rot{to{transform:rotate(360deg)}}@keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}</style>
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  const io = new IntersectionObserver((es)=>{
+    es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach((el,i)=>{ el.style.transitionDelay=(Math.min(i,6)*50)+'ms'; io.observe(el); });
+
+  function animateCount(el){
+    const target=+el.dataset.count, dur=1600, start=performance.now();
+    (function tick(now){ const p=Math.min((now-start)/dur,1), e=1-Math.pow(1-p,3);
+      el.textContent=Math.round(e*target).toLocaleString(); if(p<1)requestAnimationFrame(tick); })(start);
+  }
+  const mio=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('[data-count]').forEach(animateCount);mio.unobserve(e.target);}});},{threshold:.4});
+  mio.observe(document.getElementById('metricstrip'));
+
+
+  const btns=document.querySelectorAll('.pubfilter button'), pubs=document.querySelectorAll('#publist .pub');
+  const publist=document.getElementById('publist'), pubtoggle=document.getElementById('pubtoggle');
+  const PUB_LIMIT=6; let pubFilter='all', pubExpanded=false;
+  function renderPubs(reveal){
+    let shown=0;
+    pubs.forEach(p=>{
+      const match=(pubFilter==='all'||p.dataset.yr===pubFilter);
+      let vis=match;
+      if(pubFilter==='all' && !pubExpanded){ vis = match && shown<PUB_LIMIT; }
+      p.style.display=vis?'':'none';
+      if(vis){ shown++; if(reveal) p.classList.add('in'); }
+    });
+    publist.classList.toggle('collapsed', pubFilter==='all' && !pubExpanded);
+    if(pubFilter==='all'){
+      pubtoggle.style.display='';
+      pubtoggle.textContent = pubExpanded ? 'Show less' : ('Show all '+pubs.length);
+    } else {
+      pubtoggle.style.display='none';
+    }
+  }
+  btns.forEach(b=>b.addEventListener('click',()=>{ btns.forEach(x=>x.classList.remove('active')); b.classList.add('active'); pubFilter=b.dataset.f; renderPubs(true); }));
+  pubtoggle.addEventListener('click',()=>{ pubExpanded=!pubExpanded; renderPubs(true); if(!pubExpanded){ document.getElementById('publications').scrollIntoView({behavior:'smooth',block:'start'}); } });
+  renderPubs(false);
+
+  document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',function(e){
+    const id=this.getAttribute('href');
+    if(id && id.length>1){
+      const el=document.querySelector(id);
+      if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth',block:'start'}); }
+    }
+    const nv=document.getElementById('nv'); if(nv) nv.classList.remove('open');
+  }));
+
+  // hero beamforming field
+  (function(){
+    const cv = document.getElementById('field');
+    if(!cv) return;
+    const ctx = cv.getContext('2d');
+    const ACC = '120,225,202';
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const N = 7; // array elements -> main lobe + side lobes
+    let W,H,dpr,cx,cy,R,prev,t,targets;
+    function resize(){
+      dpr = Math.min(window.devicePixelRatio||1, 2);
+      W = cv.clientWidth; H = cv.clientHeight;
+      if(!W||!H) return;
+      cv.width=W*dpr; cv.height=H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0);
+      cx=W*0.70; cy=H*0.50; R=Math.min(W,H)*0.46; t=0;
+      targets=[{a:-0.55,r:R*0.62},{a:0.5,r:R*0.5},{a:-1.45,r:R*0.4}];
+    }
+    function wrap(x){ x=(x+Math.PI)%(2*Math.PI); if(x<0)x+=2*Math.PI; return x-Math.PI; }
+    function af(phi, phi0){
+      const psi = wrap(phi - phi0), den = Math.sin(psi/2);
+      if(Math.abs(den) < 1e-4) return 1;
+      return Math.abs(Math.sin(N*psi/2)/(N*den));
+    }
+    function grid(){
+      ctx.strokeStyle='rgba('+ACC+',0.07)'; ctx.lineWidth=1;
+      for(let i=1;i<=4;i++){ ctx.beginPath(); ctx.arc(cx,cy,R*i/4,0,7); ctx.stroke(); }
+      for(let a=0;a<8;a++){ const ang=a*Math.PI/4; ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(cx+Math.cos(ang)*R,cy+Math.sin(ang)*R); ctx.stroke(); }
+    }
+    function pattern(phi0){
+      ctx.beginPath();
+      const steps=240;
+      for(let i=0;i<=steps;i++){
+        const phi=-Math.PI+(2*Math.PI)*i/steps;
+        const r=R*af(phi,phi0);
+        const x=cx+Math.cos(phi)*r, y=cy+Math.sin(phi)*r;
+        i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+      }
+      ctx.closePath();
+      ctx.fillStyle='rgba('+ACC+',0.06)'; ctx.fill();
+      ctx.strokeStyle='rgba('+ACC+',0.38)'; ctx.lineWidth=1.2; ctx.stroke();
+      ctx.strokeStyle='rgba('+ACC+',0.55)'; ctx.lineWidth=1.3;
+      ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(cx+Math.cos(phi0)*R, cy+Math.sin(phi0)*R); ctx.stroke();
+      ctx.fillStyle='rgba('+ACC+',0.5)';
+      const perp=phi0+Math.PI/2;
+      for(let k=-3;k<=3;k++){ const ex=cx+Math.cos(perp)*k*6, ey=cy+Math.sin(perp)*k*6; ctx.beginPath(); ctx.arc(ex,ey,1.6,0,7); ctx.fill(); }
+    }
+    function blips(phi0, live){
+      targets.forEach(tg=>{
+        const d=Math.abs(wrap(phi0-tg.a));
+        const b=live?Math.max(0,1-d/0.4):0.25;
+        ctx.fillStyle='rgba('+ACC+','+(0.12+0.6*b).toFixed(3)+')';
+        ctx.beginPath(); ctx.arc(cx+Math.cos(tg.a)*tg.r, cy+Math.sin(tg.a)*tg.r, 2+1.6*b, 0,7); ctx.fill();
+      });
+    }
+    function steer(){ return -Math.PI*0.15 + Math.PI*0.42*Math.sin(t*0.00045); }
+    function draw(now){
+      const dt=prev?Math.min(now-prev,50):16; prev=now; t+=dt;
+      ctx.clearRect(0,0,W,H);
+      grid();
+      const phi0=steer();
+      pattern(phi0);
+      blips(phi0,true);
+      requestAnimationFrame(draw);
+    }
+    function still(){ ctx.clearRect(0,0,W,H); grid(); const p=-Math.PI*0.15; pattern(p); blips(p,false); }
+    let to; window.addEventListener('resize', ()=>{ clearTimeout(to); to=setTimeout(()=>{ resize(); if(reduce) still(); },150); });
+    resize();
+    if(reduce){ still(); } else { requestAnimationFrame(draw); }
+  })();
+
+</script>
+</body>
+</html>
